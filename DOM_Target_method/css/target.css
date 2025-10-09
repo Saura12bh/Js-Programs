@@ -1,0 +1,46 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+.box {
+  width: 80%;
+  margin: auto;
+  height: 500px;
+  border: 1px solid #000;
+  padding: 10px 20px;
+}
+.b1 {
+  border: 1px solid #000;
+  background-color: pink;
+  color: #000;
+  padding: 20px 20px;
+}
+.b1 h1 {
+  color: black;
+}
+.b2 {
+  border: 1px solid #000;
+  background-color: grey;
+  color: aliceblue;
+  padding: 20px 20px;
+  margin-top: 10px;
+}
+.b2 ul {
+  list-style: none;
+}
+.b2 ul li {
+  padding: 5px;
+}
+.b3 {
+  background-color: skyblue;
+  padding: 20px 20px;
+  margin-top: 10px;
+}
+.para {
+  color: azure;
+  background-color: limegreen;
+}
+.stbtn {
+  font-size: large;
+}
