@@ -1,0 +1,28 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+.box {
+  width: 50%;
+  height: 100px;
+  margin: auto;
+  border: 1px solid #000;
+  margin-top: 300px;
+  background-color: teal;
+}
+.btn {
+  background-color: pink;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-left: 300px;
+  padding: 10px 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+#show {
+  padding: 6px 10px;
+}

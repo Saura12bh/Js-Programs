@@ -1,0 +1,224 @@
+Ajax in js 
+
+full form->asynchronus javascript and xml
+It not programming language it is technique
+
+It allows web pages to send and receive data from a server in the backgroundwithout reloading the entire page.
+
+AJAX म्हणजे अशी पद्धत ज्यामुळे वेब पेज सर्व्हरकडून डेटा आणू किंवा पाठवू शकते
+तेही पेज रीलोड न करता.
+
+jr aplya page refresh n krta data anaycha kiva dynamically data change kraycha asel tr apn ajax use krto
+
+old prb->
+jr apn page madhe submit button drop down select,radio button use kele ani ani tyala data select kelya vr total page refresh hoych ani adhi fill kelela data sagla nigun jaycha jo apn text box madhe vagre bharel asaycha to 
+
+ajax 1st implment in .net
+
+why use ajax
+1->by using ajax we can display the data without refreshing the page 
+2->It used to communicate the server asynchronus without reloading or refreshig the page
+3->It allow the web application to send and retrive data from server in background 
+4->it inhance the user experinece
+
+=>Purpose / Use:
+Fetch data from a server (like APIs)
+Submit forms without reloading the page
+Update only part of a web page dynamically
+
+To run the ajax we Required server
+1->apache tomcate
+2->xammp
+3->live server (we mainly use)
+
+key Features 
+1->asynchronus communication
+    data exchange in background without distrubing user
+2->partail page update
+    only specific section of webpage are update insted of reloading entired page
+3->support for multiple data formates 
+    Ajax can handle JSON,XML,HTML,text,etc data
+
+What happens if Ajax is not used
+1->full page reload problem
+2->slower interation--webpage reload many time make slower
+3->poor user experinece
+4->high bandwidth usage  --again again data transfer then consume more bandwidth
+
+When to use Ajax
+1->Dynamic content loding and update
+    for updating parts of webpage dynamically eg-CRUD operations like photo upload kelya vr jr konhi like cmt keli tr tech vadht fkt full page refresh nahi hot 
+2->for validation
+    valiate user input on server without reloading page  like jr apn email sathi text box use kela tr page refresh n hota tyani lagech valiate kel pahije
+3-data fetching
+    fetch realtime data like stock price,wether update,or chat message 
+
+Ajax can be implemented by using two way
+1->by using XMLHttpRequest ->it is older method
+2->by using Fetch() method or API -> it is new method
+
+Way 1->XMLHttpRequest
+
+core Compoent
+XMLHttpRequest :core of Ajax .It is used to interact with server 
+it is class we can make its object then used the its methods
+data anayche neych kam ha krto
+
+1-add eventLister on btn 
+document.getElementById("btn").addEvenetLister("click",getData)
+
+2-write get data function
+ function getData()
+ {
+    3  create object of XMLHttpRequest
+     const xhr=new XMLHttpRequest();
+
+    4 make connection with server using open method
+    xhr.open("GET","data.text",true);
+        open method use for the connection with the server
+        1st paramter ->https chya method ->GET,PUT,POST
+        2nd paramter -> file name ,file path ,url etc
+        3rd paramter -> true or false ->synchronus operations te always True thevaych
+    
+    5 xhr.onreadystatechange=()=>{
+
+        onreadystatechange ha yek ajax cha event ahe ani to function gheto tya madhe apn apl logic lihaych atta apn arrow function lihil tsch apn named function ,annomous function kont pn use kru shkto
+
+    6  write a function logic
+        if(xhr.readyState===XMLHttpRequest.DONE or apn 4 use kru shkto)
+                            readyState chya 5 value astya
+                        0	UNSENT – Request not initialized	विनंती अजून तयार नाही
+                        1	OPENED – Request created by open()	विनंती तयार झाली आहे
+                        2	HEADERS_RECEIVED – Request sent	सर्व्हरने विनंती स्वीकारली आहे
+                        3	LOADING – Processing the request	डेटा येत आहे
+                        4	DONE – Operation completed	विनंती पूर्ण झाली आहे
+            {  
+            he check krt data bhetla ka nahi object la te
+
+    7 check the status code of objeect
+            if(xhr.status===200)   //200 mhnje ok code
+            {
+                //apl logic
+                cl(xhr);  //object print kela mhnje console vr tyachya property ani method distya
+                cl(xhr.response);  //text file madhla data console vr display hoto
+            }
+            else{
+                jr status 200 nsel tr error yeto to handle kraycha
+                cl("Some things went wrong..");
+            }
+        }
+    };
+    8->always call the send() jr apn call keli nahi tr op dist nahi
+
+    xhr.send();
+ };
+ 
+Note->if we want display data on page 
+1->then fetch id of display location
+var p1=document.getElementById("p");
+
+2->write loginc in function if condtion
+  if(xhr.status===200)   //200 mhnje ok code
+            {
+                //apl logic
+                cl(xhr);  //object print kela mhnje console vr tyachya property ani method distya
+                cl(xhr.response);  //text file madhla data console vr display hoto
+
+
+                //display data on page
+                p1.innerText=xhr.response();
+            }
+
+
+Properties of Ajax
+1->response
+    Returns the response data as a string
+
+2->responseText
+    Returns the response data as a string
+     but diffrence is response only text handle and responseText return both text and JSON
+
+3->responseType
+    Defines the type of data expected (like “json”, “text”, “blob”)  kontya type cha data ahe te sangt
+
+4->status 
+    Returns the HTTP status code (like 200, 404, 500, etc.) 200 ok 404 mhnje serse essue
+
+5->statusText
+    Returns the status message (like “OK”, “Not Found”)
+     je code return zale tyna text madhe det 
+
+6->responseURL 
+    konta URL madhe data yetoy te return krt 
+
+
+Ajax Events
+1->onreadystatechange	
+    Triggered whenever readyState changes (0 → 4)	विनंतीच्या प्रत्येक टप्प्यावर चालते   
+
+2->onload	  onreadystatechange yevji hech atta pasun use kraychi
+    When the request is completed successfully (readyState=4 & status=200)
+        	विनंती यशस्वीरीत्या पूर्ण झाली की चालते
+
+3->onerror
+	When the request fails (e.g., wrong URL, network issue)
+        	विनंती फेल झाली की चालते
+4->onprogress	
+    When the browser is downloading the response data
+    	डेटा डाउनलोड होत असताना चालते
+
+    xhr.onprogress = (e) => {
+    console.log(e.loaded);
+    console.log(e.total);
+    };
+     he method yek paramter gheti load mhnje kiti data load zala total data peki total mhnje sagla data
+5-onabort
+	When the request is canceled using xhr.abort()
+    	विनंती मध्येच थांबवली की चालते
+6->ontimeout
+	When the request exceeds the time limit set in xhr.timeout
+    	दिलेल्या वेळेत प्रतिसाद न मिळाल्यास चालते
+7-onloadstart
+	When the request starts loading
+    	विनंती सुरू झाली की चालते
+8 ->onloadend
+	When the request finishes (success or fail)
+    	विनंती पूर्ण झाली (यशस्वी किंवा फेल) की चालते
+
+
+
+
+2 Way ->using fetch() method
+
+fetch() is a modern JavaScript API used to make HTTP requests (like AJAX) to load data from a server without reloading the page.
+It returns a Promise, so we can use .then() and .catch() to handle the result.
+It is a replacement for old AJAX (XMLHttpRequest).
+
+Syntaxt=>
+
+fetch("file_or_url")
+  .then(response => response.text()) // or response.json()
+  .then(data => {
+    // use the data
+  })
+  .catch(error => {
+    // handle error
+  });
+
+| Concept           | Explanation                          |
+| ----------------- | ------------------------------------ |
+| `fetch()`         | Used to send HTTP request            |
+| `response.ok`     | Checks if status is 200–299          |
+| `response.text()` | Converts response body to text       |
+| `.json()`         | Use this instead if the file is JSON |
+| `.catch()`        | Handles network or response errors   |
+
+
+
+How it works (for interview):
+You can say this 👇
+
+“In JavaScript, the fetch() method is used to make asynchronous requests to get data from a server.
+It returns a Promise — which means it works in the background without blocking the page.
+When data is successfully fetched, it goes to .then().
+If there is any problem, it goes to .catch().”
